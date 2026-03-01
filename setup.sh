@@ -181,27 +181,30 @@ else
   log "gcloud installed"
 fi
 
-# ─── Neovim (AppImage) ───────────────────────────────────────────────────────
+# ─── Neovim ───────────────────────────────────────────────────────────────────
 
 section "Neovim"
 if has nvim; then
   log "Neovim already installed ($(nvim --version | head -1))"
 else
-  info "Installing Neovim (latest stable AppImage)..."
-  curl -fsSL -o /tmp/nvim.appimage \
-    https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
-  chmod +x /tmp/nvim.appimage
+  ARCH=$(uname -m)
+  case "$ARCH" in
+    x86_64)  NVIM_ARCH="x86_64" ;;
+    aarch64) NVIM_ARCH="arm64" ;;
+    *)       warn "Unsupported architecture: $ARCH — skipping Neovim"; NVIM_ARCH="" ;;
+  esac
 
-  # Try extracting (works without FUSE) — fallback to direct AppImage
-  if (cd /tmp && /tmp/nvim.appimage --appimage-extract &>/dev/null); then
+  if [[ -n "$NVIM_ARCH" ]]; then
+    info "Installing Neovim (latest stable for $ARCH)..."
+    curl -fsSL -o /tmp/nvim.tar.gz \
+      "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${NVIM_ARCH}.tar.gz"
     sudo rm -rf /opt/nvim
-    sudo mv /tmp/squashfs-root /opt/nvim
-    sudo ln -sf /opt/nvim/AppRun /usr/local/bin/nvim
-    rm /tmp/nvim.appimage
-  else
-    sudo mv /tmp/nvim.appimage /usr/local/bin/nvim
+    sudo tar -xzf /tmp/nvim.tar.gz -C /opt
+    sudo mv /opt/nvim-linux-* /opt/nvim
+    sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
+    rm /tmp/nvim.tar.gz
+    log "Neovim installed ($(nvim --version | head -1))"
   fi
-  log "Neovim installed ($(nvim --version | head -1))"
 fi
 
 # ─── LazyVim ──────────────────────────────────────────────────────────────────
