@@ -25,7 +25,7 @@ Config files copied to `~`:
 
 ```bash
 # 1. Clone this repo
-git clone https://github.com/YOUR_USERNAME/linux-setup.git
+git clone https://github.com/inkuxuan/linux-setup.git
 cd linux-setup
 
 # 2. Run the setup script
