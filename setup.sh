@@ -202,6 +202,22 @@ else
   fi
 fi
 
+# ─── cht.sh ──────────────────────────────────────────────────────────────────
+
+section "cht.sh (cheat sheet)"
+if [[ -x "$HOME/.local/bin/cht.sh" ]] || has cht.sh; then
+  log "cht.sh already installed"
+else
+  if confirm "Install cht.sh?"; then
+    mkdir -p "$HOME/.local/bin"
+    curl -fsSL https://cht.sh/:cht.sh > "$HOME/.local/bin/cht.sh"
+    chmod +x "$HOME/.local/bin/cht.sh"
+    log "cht.sh installed to ~/.local/bin/"
+  else
+    warn "Skipped cht.sh"
+  fi
+fi
+
 # ─── GitHub CLI ───────────────────────────────────────────────────────────────
 
 section "GitHub CLI (gh)"
