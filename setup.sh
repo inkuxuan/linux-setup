@@ -195,7 +195,7 @@ if has claude; then
 else
   if confirm "Install Claude Code?"; then
     info "Installing Claude Code..."
-    npm install -g @anthropic-ai/claude-code
+    curl -fsSL https://claude.ai/install.sh | bash
     log "Claude Code installed"
   else
     warn "Skipped Claude Code"

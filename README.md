@@ -11,7 +11,7 @@ One-command bootstrap for a fresh Ubuntu machine. Installs and configures the to
 | Node.js + npm | nvm (latest, auto-detected) |
 | uv | astral.sh installer |
 | Docker | get.docker.com |
-| Claude Code | npm global |
+| Claude Code | install script |
 | GitHub CLI (gh) | official apt repo |
 | Google Cloud CLI | official apt repo |
 | Neovim | latest stable AppImage |
