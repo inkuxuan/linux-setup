@@ -108,5 +108,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Aliases
 alias tm="tm.sh"
+alias tmn="tmux new-session -s"
+alias tma="tmux attach-session -t"
+alias tml="tmux ls"
 
 
