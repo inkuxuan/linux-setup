@@ -218,6 +218,21 @@ else
   fi
 fi
 
+# ─── NextTrace ───────────────────────────────────────────────────────────────
+
+section "NextTrace (nxtrace)"
+if has nexttrace; then
+  log "nexttrace already installed"
+else
+  if confirm "Install NextTrace?"; then
+    info "Installing NextTrace..."
+    curl -sL https://nxtrace.org/nt | bash
+    log "NextTrace installed"
+  else
+    warn "Skipped NextTrace"
+  fi
+fi
+
 # ─── GitHub CLI ───────────────────────────────────────────────────────────────
 
 section "GitHub CLI (gh)"
